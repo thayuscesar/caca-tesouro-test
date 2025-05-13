@@ -1,33 +1,42 @@
-let totalItems = 2; // Total de objetos
-let foundItems = 0;
-let userName = prompt("Qual é o seu nome?");
-let startTime = new Date();
-let foundMarkers = new Set();
+const statusText = document.getElementById("status");
+const resgatarBtn = document.getElementById("resgatarBtn");
 
-document.getElementById("infoButton").onclick = function () {
-  document.getElementById("userInfo").style.display = "block";
-  document.getElementById("userName").innerText = userName;
-  document.getElementById("gameTime").innerText =
-    Math.floor((new Date() - startTime) / 1000) + " segundos";
-  document.getElementById("foundItems").innerText = foundItems;
-};
+const markerLivro = document.getElementById("markerLivro");
+const markerGarrafa = document.getElementById("markerGarrafa");
 
-document.getElementById("takePhoto").onclick = function () {
-  alert("📸 Foto tirada! (Função de captura pode ser implementada com canvas)");
-};
+const tesouroLivro = document.getElementById("tesouroLivro");
+const tesouroGarrafa = document.getElementById("tesouroGarrafa");
 
-["marker1", "marker2"].forEach((id) => {
-  document.getElementById(id).addEventListener("markerFound", function () {
-    if (!foundMarkers.has(id)) {
-      foundMarkers.add(id);
-      foundItems++;
-      document.getElementById(
-        "status"
-      ).innerText = `Objetos encontrados: ${foundItems} de ${totalItems}`;
+let ativo = null;
 
-      if (foundItems === totalItems) {
-        alert("🎉 Parabéns! Você encontrou todos os tesouros!");
-      }
-    }
-  });
+function mostrarBotao(marcador) {
+  if (!ativo) {
+    ativo = marcador;
+    statusText.innerText = "🎯 Tesouro avistado!";
+    resgatarBtn.style.display = "block";
+  }
+}
+
+function esconderBotao(marcador) {
+  if (ativo === marcador) {
+    ativo = null;
+    statusText.innerText = "📡 Aguardando marcador do tesouro...";
+    resgatarBtn.style.display = "none";
+  }
+}
+
+markerLivro.addEventListener("markerFound", () => mostrarBotao("livro"));
+markerLivro.addEventListener("markerLost", () => esconderBotao("livro"));
+markerGarrafa.addEventListener("markerFound", () => mostrarBotao("garrafa"));
+markerGarrafa.addEventListener("markerLost", () => esconderBotao("garrafa"));
+
+resgatarBtn.addEventListener("click", () => {
+  if (ativo === "livro") {
+    tesouroLivro.setAttribute("visible", "false");
+  } else if (ativo === "garrafa") {
+    tesouroGarrafa.setAttribute("visible", "false");
+  }
+  resgatarBtn.style.display = "none";
+  statusText.innerText = "✅ Tesouro resgatado com sucesso!";
+  ativo = null;
 });
