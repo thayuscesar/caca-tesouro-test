@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Caça ao Tesouro RA</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div id="start-screen">
+    <img src="img/tesouro1.jpg" class="capa" />
+    <button onclick="iniciarJogo()" class="botao-pulsando">🎯 COMEÇAR</button>
+  </div>
+
+  <div id="game-screen" class="oculto">
+    <div id="contador">Itens Encontrados: 0 de 12</div>
+    <iframe src="ar.html" id="ar-frame"></iframe>
+  </div>
+
+  <div id="imagem-tesouro" class="oculto">
+    <img id="imagem-grande" src="" alt="Tesouro" />
+    <button onclick="fecharImagem()">FECHAR</button>
+  </div>
+</body>
+</html>
