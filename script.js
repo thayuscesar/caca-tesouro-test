@@ -1,32 +1,26 @@
-const statusText = document.getElementById("status");
-const overlay = document.getElementById("overlay");
-const resgatarBtn = document.getElementById("resgatarBtn");
 
-const markerLivro = document.getElementById("markerLivro");
-const markerGarrafa = document.getElementById("markerGarrafa");
-
-let encontradoLivro = false;
-let encontradoGarrafa = false;
-
-function mostrarTesouro(origem) {
-  if ((origem === "livro" && !encontradoLivro) || (origem === "garrafa" && !encontradoGarrafa)) {
-    overlay.style.display = "flex";
-    statusText.innerText = "🎯 Tesouro avistado!";
-    overlay.dataset.origem = origem;
-  }
+function mostrarFormulario() {
+  document.getElementById('start-screen').classList.add('oculto');
+  document.getElementById('form-screen').classList.remove('oculto');
 }
 
-function esconderTesouro() {
-  overlay.style.display = "none";
-  statusText.innerText = "✅ Tesouro resgatado com sucesso!";
+function iniciarJogo() {
+  const nome = document.getElementById('nome').value;
+  const idade = document.getElementById('idade').value;
+
+  if (!nome || !idade) return false;
+
+  document.getElementById('form-screen').classList.add('oculto');
+  document.getElementById('game-screen').classList.remove('oculto');
+  return false;
 }
 
-markerLivro.addEventListener("markerFound", () => mostrarTesouro("livro"));
-markerGarrafa.addEventListener("markerFound", () => mostrarTesouro("garrafa"));
+function mostrarImagem(src) {
+  document.getElementById('imagem-grande').src = src;
+  document.getElementById('imagem-tesouro').classList.remove('oculto');
+}
 
-resgatarBtn.addEventListener("click", () => {
-  const origem = overlay.dataset.origem;
-  if (origem === "livro") encontradoLivro = true;
-  if (origem === "garrafa") encontradoGarrafa = true;
-  esconderTesouro();
-});
+function fecharImagem() {
+  document.getElementById('imagem-tesouro').classList.add('oculto');
+  // Atualizar contador de itens (lógica posterior)
+}

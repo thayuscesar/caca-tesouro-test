@@ -1,32 +1,35 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Caça ao Tesouro RA - Vini Viajante</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-  <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <title>Caça ao Tesouro RA</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <div id="status">📡 Aguardando marcador do tesouro...</div>
-
-  <div id="overlay" style="display: none;">
-    <img id="imgTesouro" src="assets/vini-tesouro.png" alt="Tesouro encontrado">
-    <button id="resgatarBtn">🎁 Resgatar Tesouro</button>
+  <div id="start-screen">
+    <img src="img/capa.jpg" class="capa" />
+    <button onclick="mostrarFormulario()" class="botao-pulsando">🎯 COMEÇAR</button>
   </div>
 
-  <a-scene
-    embedded
-    vr-mode-ui="enabled: false"
-    renderer="logarithmicDepthBuffer: true;"
-    arjs="sourceType: webcam; debugUIEnabled: false; facingMode: environment"
-  >
-    <a-marker id="markerLivro" type="pattern" url="assets/livro.patt"></a-marker>
-    <a-marker id="markerGarrafa" type="pattern" url="assets/garrafa.patt"></a-marker>
-    <a-entity camera="fov: 80; near: 0.01;" position="0 0 0"></a-entity>
-  </a-scene>
+  <div id="form-screen" class="oculto">
+    <form onsubmit="return iniciarJogo()">
+      <input type="text" id="nome" placeholder="Seu nome" required />
+      <input type="number" id="idade" placeholder="Sua idade" required />
+      <button type="submit">✅ JOGAR AGORA</button>
+    </form>
+  </div>
 
-  <script src="script.js"></script>
+  <div id="game-screen" class="oculto">
+    <div id="contador">Itens Encontrados: 0 de 12</div>
+    <iframe src="ar.html" id="ar-frame"></iframe>
+  </div>
+
+  <div id="imagem-tesouro" class="oculto">
+    <img id="imagem-grande" src="" alt="Tesouro" />
+    <button onclick="fecharImagem()">FECHAR</button>
+  </div>
 </body>
 </html>
