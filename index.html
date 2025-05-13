@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caça ao Tesouro</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div id="start-screen">
+    <h1>Caça ao Tesouro</h1>
+    <p>Encontre as 12 pistas escondidas com sua câmera!</p>
+    <button onclick="iniciarJogo()" class="botao-pulsando">🎯 COMEÇAR</button>
+  </div>
+  <div id="game-screen" class="oculto">
+    <div id="contador">Itens Encontrados: 0 de 12</div>
+    <iframe src="ar.html" id="ar-frame"></iframe>
+  </div>
+</body>
+</html>
